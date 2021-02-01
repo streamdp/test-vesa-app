@@ -1,0 +1,72 @@
+{% extends "gs/base.html" %}
+
+{% block title %}
+	{{ block.super }} – главная
+{% endblock %}
+
+{% block content %}
+    <nav class="nav mt-5">
+      <a class="nav-link text-secondary" href="/">Home</a>
+      <a class="nav-link text-secondary" href="/get_all_fans/">Show all fans</a>
+      <a class="nav-link text-secondary" href="/addfan/">Add 10 random fans</a>
+    </nav>
+    {% if form != None %}
+    <div class="card mt-5">
+        <div class="card-header"><h1>Quick Selector</h1></div>
+        <div class="card-body">
+            <form class="form-row" method="post" action="/">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group col-md-6 {% if field.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ field.label }}</label>
+                    <div class="controls">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+                <div class="form-actions d-flex justify-content-end">
+                    <button type="submit" class="btn btn-secondary">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if fans.count > 0  %}
+    <table class="table mt-5">
+        <thead class="thead-dark">
+            <tr>
+                <th class="align-middle" scope="col"></th>
+                <th class="align-middle" scope="col">Item no.</th>
+                <th class="align-middle" scope="col">Type</th>
+                <th class="align-middle" scope="col">Fan diameter</th>
+                <th class="align-middle" scope="col">Airflow</th>
+                <th class="align-middle" scope="col">TOTAL Pressure</th>
+                <th class="align-middle" scope="col">Fan efficiently</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fan in fans %}
+            <tr align="center">
+                <th scope="row">
+                    <img src="{{MEDIA_URL}}{{fan.pic_url }} ">
+                </th>
+                <td class="align-middle">{{fan.num}}</td>
+                <td class="align-middle">{{fan.type}}</td>
+                <td class="align-middle">{{fan.diameter}}</td>
+                <td class="align-middle">{{fan.airflow}} {% if fan.airflow_unit == 'M3S' %} m³/s {% elif fan.airflow_unit == 'M3H'  %} m³/h {% else %}{{ fan.airflow_unit }}{% endif %} </td>
+                <td class="align-middle">{{fan.pressure}} {% if fan.pressure_unit == 'PA' %} Pa {% else %} {{ fan.pressure_unit }} {% endif %}</td>
+                <td class="align-middle">{{fan.efficiently}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% elif fans.count == 0 %}
+    <h1 class="mt-5">Nothing found!</h1>
+    {% endif %}
+    {% if form is None %}
+    <div class="form-actions d-flex justify-content-start mt-5">
+        <a href="/" class="btn btn-secondary">Back</a>
+    </div>
+    {% endif %}
+{% endblock %}       
