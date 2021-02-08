@@ -1,4 +1,5 @@
 {% extends "gs/base.html" %}
+{% load static %}
 
 {% block title %}
 	{{ block.super }} – главная
@@ -49,7 +50,7 @@
         {% for fan in fans %}
             <tr align="center">
                 <th scope="row">
-                    <img src="{{MEDIA_URL}}{{fan.pic_url }} ">
+                    <img src="{% static '/img/' %}{{fan.pic_url}}">
                 </th>
                 <td class="align-middle">{{fan.num}}</td>
                 <td class="align-middle">{{fan.type}}</td>

@@ -29,7 +29,7 @@ SECRET_KEY = '906841j!b+zn99_f-rzu5*j312&*htj+r5)zu11xs97@zva2wb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['test-vesa.herokuapp.com']
 
 
 # Application definition
@@ -87,6 +87,10 @@ DATABASES = {
     }
 }
 
+# ie if Heroku server
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -124,4 +128,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/media/'
+STATIC_URL = '/static/'
