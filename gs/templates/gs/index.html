@@ -34,34 +34,36 @@
     {% endif %}
 
     {% if fans.count > 0  %}
-    <table class="table mt-5">
-        <thead class="thead-dark">
-            <tr>
-                <th class="align-middle" scope="col"></th>
-                <th class="align-middle" scope="col">Item no.</th>
-                <th class="align-middle" scope="col">Type</th>
-                <th class="align-middle" scope="col">Fan diameter</th>
-                <th class="align-middle" scope="col">Airflow</th>
-                <th class="align-middle" scope="col">TOTAL Pressure</th>
-                <th class="align-middle" scope="col">Fan efficiently</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fan in fans %}
-            <tr align="center">
-                <th scope="row">
-                    <img src="{% static '/img/' %}{{fan.pic_url}}">
-                </th>
-                <td class="align-middle">{{fan.num}}</td>
-                <td class="align-middle">{{fan.type}}</td>
-                <td class="align-middle">{{fan.diameter}}</td>
-                <td class="align-middle">{{fan.airflow}} {% if fan.airflow_unit == 'M3S' %} m³/s {% elif fan.airflow_unit == 'M3H'  %} m³/h {% else %}{{ fan.airflow_unit }}{% endif %} </td>
-                <td class="align-middle">{{fan.pressure}} {% if fan.pressure_unit == 'PA' %} Pa {% else %} {{ fan.pressure_unit }} {% endif %}</td>
-                <td class="align-middle">{{fan.efficiently}}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table mt-5">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="align-middle" scope="col"></th>
+                    <th class="align-middle" scope="col">Item no.</th>
+                    <th class="align-middle" scope="col">Type</th>
+                    <th class="align-middle" scope="col">Fan diameter</th>
+                    <th class="align-middle" scope="col">Airflow</th>
+                    <th class="align-middle" scope="col">TOTAL Pressure</th>
+                    <th class="align-middle" scope="col">Fan efficiently</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for fan in fans %}
+                <tr align="center">
+                    <th scope="row">
+                        <img src="{% static '/img/' %}{{fan.pic_url}}">
+                    </th>
+                    <td class="align-middle">{{fan.num}}</td>
+                    <td class="align-middle">{{fan.type}}</td>
+                    <td class="align-middle">{{fan.diameter}}</td>
+                    <td class="align-middle">{{fan.airflow}} {% if fan.airflow_unit == 'M3S' %} m³/s {% elif fan.airflow_unit == 'M3H'  %} m³/h {% else %}{{ fan.airflow_unit }}{% endif %} </td>
+                    <td class="align-middle">{{fan.pressure}} {% if fan.pressure_unit == 'PA' %} Pa {% else %} {{ fan.pressure_unit }} {% endif %}</td>
+                    <td class="align-middle">{{fan.efficiently}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% elif fans.count == 0 %}
     <h1 class="mt-5">Nothing found!</h1>
     {% endif %}
