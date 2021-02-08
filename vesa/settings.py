@@ -29,7 +29,7 @@ SECRET_KEY = '906841j!b+zn99_f-rzu5*j312&*htj+r5)zu11xs97@zva2wb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['test-vesa.herokuapp.com']
+ALLOWED_HOSTS = ['test-vesa.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
